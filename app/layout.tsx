@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+
+import AuthSession from './AuthSession';
+import LeftMenu from './_components/LeftMenu';
+
 import './globals.css';
 import './sb-admin-2.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AuthSession from './AuthSession';
-import LeftMenu from './_components/LeftMenu';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,9 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body style={{ display: 'flex' }}>
         <AuthSession>
-          <LeftMenu>{children}</LeftMenu>
+          <LeftMenu />
+          {children}
         </AuthSession>
       </body>
     </html>
