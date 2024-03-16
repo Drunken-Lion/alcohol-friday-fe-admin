@@ -24,12 +24,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body style={{ display: 'flex' }}>
-        <AuthSession>
-          <LeftMenu />
-          {children}
-        </AuthSession>
+        {/* <AuthSession> */}
+        <LeftMenu />
+        {children}
+        {/* </AuthSession> */}
       </body>
     </html>
   );

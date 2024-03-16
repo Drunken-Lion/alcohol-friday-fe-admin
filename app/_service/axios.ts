@@ -1,10 +1,13 @@
 // 'use client';
 
 import axios from 'axios';
-import { getSession } from 'next-auth/react';
+//import { getSession } from 'next-auth/react';
+
+const accessToken = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_API_BASEURL,
+  //baseURL: process.env.REACT_APP_API_BASEURL,
+  baseURL: process.env.NEXT_PUBLIC_BASE_API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -12,7 +15,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   async (config) => {
-    const session = await getSession();
+    //const session = await getSession();
     // if (session) {
     //   config.headers['Authorization'] = `Bearer ${session.accessToken}`;
     // }
@@ -22,6 +25,8 @@ instance.interceptors.request.use(
     // } else {
     // token = localStorage.getItem('accessToken');
     // }
+
+    config.headers['Authorization'] = `Bearer ${accessToken}`;
 
     return config;
   },
