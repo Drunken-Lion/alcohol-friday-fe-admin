@@ -12,3 +12,14 @@ export const getMembers = async (page?: number, size?: number) => {
 
   return res.data;
 };
+
+/**
+ * /v1/admin/members/{id} 회원 단건 조회
+ */
+export const getMember = async (id: number) => {
+  console.log('MemberService - getMember');
+
+  const res = await axios.get(`${MEMBERS_URL}/${id}`);
+
+  return res.data;
+};
