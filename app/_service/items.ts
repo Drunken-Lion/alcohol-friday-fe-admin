@@ -12,3 +12,14 @@ export const getItems = async (page?: number, size?: number) => {
 
   return res.data;
 };
+
+/**
+ * /v1/admin/items/{id} 상품 상세 조회
+ */
+export const getItem = async (id: number) => {
+  console.log('ItemService - getItem');
+
+  const res = await axios.get(`${ITEMS_URL}/${id}`);
+
+  return res.data;
+};
