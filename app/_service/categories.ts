@@ -12,3 +12,14 @@ export const getCategoryClasses = async (page?: number, size?: number) => {
 
   return res.data;
 };
+
+/**
+ * /v1/admin/category-classes/{id} 카테고리 대분류 상세 조회
+ */
+export const getCategoryClass = async (id: number) => {
+  console.log('CategoriesService - getCategoryClass');
+
+  const res = await axios.get(`${CATEGORY_CLASSES_URL}/${id}`);
+
+  return res.data;
+};
