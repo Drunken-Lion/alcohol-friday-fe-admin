@@ -12,3 +12,14 @@ export const getQuestions = async (page: number, size: number) => {
 
   return res.data;
 };
+
+/**
+ * /v1/admin/questions/{id} 문의사항 상세 조회
+ */
+export const getQuestion = async (id: number) => {
+  console.log('QuestionsService - getQuestion');
+
+  const res = await axios.get(`${QUESTIONS_URL}/${id}`);
+
+  return res.data;
+};
