@@ -12,3 +12,14 @@ export const getNotices = async (page?: number, size?: number) => {
 
   return res.data;
 };
+
+/**
+ * /v1/admin/notices/{id} 공지사항 상세 조회
+ */
+export const getNotice = async (id: number) => {
+  console.log('NoticesService - getNotice');
+
+  const res = await axios.get(`${NOTICES_URL}/${id}`);
+
+  return res.data;
+};
