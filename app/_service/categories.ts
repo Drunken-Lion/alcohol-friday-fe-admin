@@ -1,6 +1,7 @@
 import axios from '@/app/_service/axios';
 
 const CATEGORY_CLASSES_URL = '/category-classes';
+const CATEGORIES_URL = '/categories';
 
 /**
  * /v1/admin/category-classes 카테고리 대분류 전체 조회
@@ -20,6 +21,17 @@ export const getCategoryClass = async (id: number) => {
   console.log('CategoriesService - getCategoryClass');
 
   const res = await axios.get(`${CATEGORY_CLASSES_URL}/${id}`);
+
+  return res.data;
+};
+
+/**
+ * /v1/admin/categories 카테고리 소분류 전체 조회
+ */
+export const getCategories = async (page?: number, size?: number) => {
+  console.log('CategoriesService - getCategories');
+
+  const res = await axios.get(CATEGORIES_URL, { params: { page, size } });
 
   return res.data;
 };
