@@ -35,3 +35,14 @@ export const getCategories = async (page?: number, size?: number) => {
 
   return res.data;
 };
+
+/**
+ * /v1/admin/categories/{id} 카테고리 소분류 상세 조회
+ */
+export const getCategory = async (id: number) => {
+  console.log('CategoriesService - getCategory');
+
+  const res = await axios.get(`${CATEGORIES_URL}/${id}`);
+
+  return res.data;
+};
