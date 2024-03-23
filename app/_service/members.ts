@@ -1,3 +1,4 @@
+import instance from '@/app/_service/axios';
 import axios from '@/app/_service/axios';
 
 const MEMBERS_URL = '/members';
@@ -8,7 +9,7 @@ const MEMBERS_URL = '/members';
 export const getMembers = async (page?: number, size?: number) => {
   console.log('MemberService - getMembers');
 
-  const res = await axios.get(MEMBERS_URL, { params: { page, size } });
+  const res = await instance.get(MEMBERS_URL, { params: { page, size } });
 
   return res.data;
 };

@@ -6,8 +6,8 @@ import axios from 'axios';
 const accessToken = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
 
 const instance = axios.create({
-  //baseURL: process.env.REACT_APP_API_BASEURL,
-  baseURL: process.env.NEXT_PUBLIC_BASE_API_URL,
+  baseURL: process.env.REACT_APP_API_BASEURL,
+  // baseURL: process.env.NEXT_PUBLIC_BASE_API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -26,7 +26,7 @@ instance.interceptors.request.use(
     // token = localStorage.getItem('accessToken');
     // }
 
-    config.headers['Authorization'] = `Bearer ${accessToken}`;
+    // config.headers['Authorization'] = `Bearer ${accessToken}`;
 
     return config;
   },
@@ -44,22 +44,22 @@ instance.interceptors.response.use(
     // if (response.data.status === 'error') {
     //     return Promise.reject(response);
     // }
-    console.log(response);
+    // console.log(response);
 
     return response;
   },
-  async (error) => {
-    // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거
-    // 응답 오류가 있는 작업 수행
+  // async (error) => {
+  //   // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거
+  //   // 응답 오류가 있는 작업 수행
 
-    const {
-      config,
-      response: { status },
-    } = error;
-    console.log('interceptor response error ' + error);
-    // return new Promise(() => {});
-    return error;
-  },
+  //   const {
+  //     config,
+  //     response: { status },
+  //   } = error;
+  //   console.log('interceptor response error ' + error);
+  //   // return new Promise(() => {});
+  //   return error;
+  // },
 );
 
 export default instance;

@@ -5,8 +5,8 @@ import AuthSession from './AuthSession';
 import LeftMenu from './_components/LeftMenu';
 
 import './globals.css';
-import './sb-admin-2.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Providers } from './providers';
+import Header from './_components/Header';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,12 +24,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <body style={{ display: 'flex' }}>
-        {/* <AuthSession> */}
-        <LeftMenu />
-        {children}
-        {/* </AuthSession> */}
+    <html lang="ko" className="light">
+      <body className={inter.className}>
+        {/* <div id="__next"> */}
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
+        {/* </div> */}
       </body>
     </html>
   );
