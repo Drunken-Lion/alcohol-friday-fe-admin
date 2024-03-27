@@ -2,7 +2,7 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
 import { AllMemberResponse, MemberDetail } from '../_types/member';
-import { getMember, getMembers } from '../_service/members';
+import { getMemberDetail, getMembers } from '../_service/members';
 
 export const useGetMembers = (page = 0, size = 20) => {
   const { data: members, isLoading } = useQuery<AllMemberResponse, AxiosError>({
@@ -14,10 +14,10 @@ export const useGetMembers = (page = 0, size = 20) => {
   return { members, isLoading };
 };
 
-export const useGetMember = (id: number) => {
+export const useGetMemberDetail = (id: number) => {
   const { data: member, isLoading } = useQuery<MemberDetail, AxiosError>({
     queryKey: ['get-member', id],
-    queryFn: () => getMember(id),
+    queryFn: () => getMemberDetail(id),
     placeholderData: keepPreviousData,
   });
 

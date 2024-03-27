@@ -1,11 +1,11 @@
 'use client';
 
-import { useGetMember } from '@/app/_hooks/useMembers';
+import { useGetMemberDetail } from '@/app/_hooks/useMembers';
 import { Checkbox, Input } from '@nextui-org/react';
 import React from 'react';
 
 export default function MemberDetailPage({ params: { id } }: { params: { id: number } }) {
-  const { member, isLoading } = useGetMember(id);
+  const { member, isLoading } = useGetMemberDetail(id);
 
   if (!member) {
     return null;

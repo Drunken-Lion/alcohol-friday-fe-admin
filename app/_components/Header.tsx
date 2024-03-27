@@ -37,13 +37,17 @@ export default function Header() {
 
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
-          <p className="font-bold text-inherit">Alcohol-Friday</p>
+          <Link className="font-bold text-inherit" href="/">
+            Alcohol-Friday
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarBrand>
-          <p className="font-bold text-inherit">Alcohol-Friday</p>
+          <Link className="font-bold text-inherit" href="/">
+            Alcohol-Friday
+          </Link>
         </NavbarBrand>
         <NavbarItem>
           <Link color="foreground" href="#">

@@ -1,3 +1,5 @@
+import { PageInfo } from './page';
+
 export interface Member {
   id: number;
   email: string;
@@ -30,8 +32,5 @@ export interface MemberDetail {
 
 export interface AllMemberResponse {
   data: Member[];
-  pageInfo: {
-    size: number;
-    count: number;
-  };
+  pageInfo: PageInfo;
 }

@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
-
+import Loading from '@/app/_components/Loading';
+import Pagination from '@/app/_components/Pagination';
+import { useGetRestaurants } from '@/app/_hooks/useRestaurants';
+import { dateFormat } from '@/app/_utils/common';
 import {
   Chip,
   Table,
@@ -12,50 +13,47 @@ import {
   TableHeader,
   TableRow,
 } from '@nextui-org/react';
-
-import { useGetMembers } from '@/app/_hooks/useMembers';
-import { dateFormat } from '@/app/_utils/common';
-import Pagination from '@/app/_components/Pagination';
-import Loading from '@/app/_components/Loading';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 
 const columns = [
   {
     key: 'id',
-    label: 'ID',
+    label: 'NO',
   },
   {
     key: 'name',
-    label: 'name',
+    label: '가게 상호명',
   },
   {
-    key: 'nickname',
-    label: 'nickname',
+    key: 'category',
+    label: '카테고리',
   },
   {
-    key: 'email',
-    label: 'email',
-  },
-  {
-    key: 'role',
-    label: 'role',
+    key: 'memberNickname',
+    label: '레스토랑 주인',
   },
   {
     key: 'createdAt',
-    label: '생성일',
+    label: '등록일',
   },
   {
-    key: 'deleted',
-    label: '삭제여부',
+    key: 'businessName',
+    label: '사업자명',
+  },
+  {
+    key: 'businessNumber',
+    label: '사업자번호',
   },
 ];
 
-export default function MembersPage() {
+export default function RestaurantsPage() {
   const [pageNum, setPageNum] = useState(1);
   const limitPerPage = 20;
-  const { members, isLoading } = useGetMembers(pageNum - 1, limitPerPage);
+  const { restaurants, isLoading } = useGetRestaurants(pageNum - 1, limitPerPage);
   const router = useRouter();
 
-  if (!members) {
+  if (!restaurants) {
     return null;
   }
 
@@ -64,7 +62,7 @@ export default function MembersPage() {
 
     switch (columnKey) {
       case 'createdAt':
-        return <div>{dateFormat(cellValue, 'YYYY-MM-DD HH:mm:ss')}</div>;
+        return <div>{dateFormat(cellValue, 'YYYY-MM-DD')}</div>;
       case 'deleted':
         return (
           <Chip
@@ -88,12 +86,12 @@ export default function MembersPage() {
         <TableHeader columns={columns}>
           {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
         </TableHeader>
-        <TableBody items={members?.data}>
+        <TableBody items={restaurants?.data}>
           {(item) => (
             <TableRow
               key={item.id}
               className="cursor-grabbing hover:bg-slate-300"
-              onClick={() => router.push(`/members/${item.id}`)}
+              onClick={() => router.push(`/restaurants/${item.id}`)}
             >
               {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
             </TableRow>
@@ -101,7 +99,7 @@ export default function MembersPage() {
         </TableBody>
       </Table>
       <Pagination
-        totalCount={members?.pageInfo.count}
+        totalCount={restaurants?.pageInfo.count}
         pageRangeDisplayed={10}
         limitPerPage={limitPerPage}
         page={pageNum}

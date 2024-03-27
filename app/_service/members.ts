@@ -6,8 +6,8 @@ import instance from './axios';
  * /v1/admin/members - 전체 회원 조회
  */
 export const getMembers = async (page = 0, size = 20) => {
-  console.log('MemberService - getMembers');
-  const res = await instance.get(`/v1/admin/members?page=${page}&size=${size}`);
+  const url = '/v1/admin/members';
+  const res = await instance.get(url, { params: { page, size } });
 
   return res.data;
 };
@@ -15,9 +15,9 @@ export const getMembers = async (page = 0, size = 20) => {
 /**
  * /v1/admin/members/{id} 회원 단건 조회
  */
-export const getMember = async (id: number) => {
-  console.log('MemberService - getMember');
-  const res = await instance.get(`/v1/admin/members/${id}`);
+export const getMemberDetail = async (id: number) => {
+  const url = `/v1/admin/members/${id}`;
+  const res = await instance.get(url);
 
   return res.data;
 };
