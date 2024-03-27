@@ -1,24 +1,29 @@
-// 'use client';
-
+'use client';
 import axios from 'axios';
-//import { getSession } from 'next-auth/react';
-
-const accessToken = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
 
 const instance = axios.create({
-  //baseURL: process.env.REACT_APP_API_BASEURL,
-  baseURL: process.env.NEXT_PUBLIC_BASE_API_URL,
+  // baseURL: process.env.REACT_APP_API_BASEURL,
+  baseURL: 'http://localhost:3001',
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
+const reissueToken = async () => {
+  const res = await instance.post('/v1/auth/reissue-token', localStorage.getItem('refreshToken'), {
+    headers: { 'content-type': 'text/plain' },
+  });
+
+  return res;
+};
+
 instance.interceptors.request.use(
-  async (config) => {
+  (config) => {
     //const session = await getSession();
-    // if (session) {
-    //   config.headers['Authorization'] = `Bearer ${session.accessToken}`;
-    // }
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken && config.url !== '/v1/auth/reissue-token') {
+      config.headers['Authorization'] = `Bearer ${accessToken}`;
+    }
 
     // if (config.url === '/reissue-token') {
     //   token = localStorage.getItem('refreshToken');
@@ -26,7 +31,7 @@ instance.interceptors.request.use(
     // token = localStorage.getItem('accessToken');
     // }
 
-    config.headers['Authorization'] = `Bearer ${accessToken}`;
+    // config.headers['Authorization'] = `Bearer ${accessToken}`;
 
     return config;
   },
@@ -44,21 +49,32 @@ instance.interceptors.response.use(
     // if (response.data.status === 'error') {
     //     return Promise.reject(response);
     // }
-    console.log(response);
+    // console.log(response);
 
     return response;
   },
   async (error) => {
-    // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거
-    // 응답 오류가 있는 작업 수행
-
     const {
       config,
       response: { status },
     } = error;
     console.log('interceptor response error ' + error);
-    // return new Promise(() => {});
-    return error;
+    console.log(config);
+    if ((status === 401 || status === 403) && config.url !== '/v1/auth/reissue-token') {
+      const originRequest = config;
+      const res = await reissueToken();
+      if (res.status === 200) {
+        localStorage.setItem('accessToken', res.data.accessToken);
+        localStorage.setItem('accessTokenExp', res.data.accessTokenExp);
+        localStorage.setItem('refreshToken', res.data.refreshToken);
+        originRequest.headers['Authorization'] = `Bearer ${res.data.accessToken}`;
+        return axios(originRequest);
+      } else {
+        return new Promise(() => {});
+      }
+    }
+
+    return new Promise(() => {});
   },
 );
 

@@ -1,12 +1,11 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
-import AuthSession from './AuthSession';
-import LeftMenu from './_components/LeftMenu';
+import { NextUIProviders } from './providers';
+import ReactQueryProvider from './_hooks/useReactQuery';
+import Header from './_components/Header';
 
 import './globals.css';
-import './sb-admin-2.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,12 +23,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <body style={{ display: 'flex' }}>
-        {/* <AuthSession> */}
-        <LeftMenu />
-        {children}
-        {/* </AuthSession> */}
+    <html lang="ko" className="light">
+      <body className={inter.className}>
+        {/* <div id="__next"> */}
+        <NextUIProviders>
+          <ReactQueryProvider>
+            <Header />
+            {children}
+          </ReactQueryProvider>
+        </NextUIProviders>
+        {/* </div> */}
       </body>
     </html>
   );
