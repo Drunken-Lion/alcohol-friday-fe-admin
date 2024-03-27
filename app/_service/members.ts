@@ -1,15 +1,13 @@
-import instance from '@/app/_service/axios';
-import axios from '@/app/_service/axios';
+'use client';
 
-const MEMBERS_URL = '/members';
+import instance from './axios';
 
 /**
  * /v1/admin/members - 전체 회원 조회
  */
-export const getMembers = async (page?: number, size?: number) => {
+export const getMembers = async (page = 0, size = 20) => {
   console.log('MemberService - getMembers');
-
-  const res = await instance.get(MEMBERS_URL, { params: { page, size } });
+  const res = await instance.get(`/v1/admin/members?page=${page}&size=${size}`);
 
   return res.data;
 };
@@ -19,8 +17,7 @@ export const getMembers = async (page?: number, size?: number) => {
  */
 export const getMember = async (id: number) => {
   console.log('MemberService - getMember');
-
-  const res = await axios.get(`${MEMBERS_URL}/${id}`);
+  const res = await instance.get(`/v1/admin/members/${id}`);
 
   return res.data;
 };

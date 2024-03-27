@@ -7,9 +7,7 @@ export default function Home() {
     <main className="flex flex-col h-screen w-screen bg-white text-black">
       <div className="flex flex-row gap-4 items-center justify-center mt-56">
         <Button color="primary" size="lg" as={Link} href="/members">
-          {/* <Link href="/members"> */}
           사용자 관리
-          {/* </Link> */}
         </Button>
         <Button size="lg">레스토랑 관리</Button>
       </div>
