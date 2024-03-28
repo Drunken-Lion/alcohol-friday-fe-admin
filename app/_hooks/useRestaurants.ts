@@ -7,6 +7,7 @@ import {
   AllRestaurantResponse,
   RestaurantDetail,
   RestaurantOrderCartReq,
+  RestaurantOrderInfoRes,
 } from '../_types/restaurants/restaurant';
 import {
   addRestaurantOrderCarts,
@@ -14,6 +15,7 @@ import {
   getRestaurantOrderCarts,
   getRestaurantOrdersProducts,
   getRestaurants,
+  postRestaurantOrders,
 } from '../_service/restaurants';
 
 export default function useRestaurants() {
@@ -74,11 +76,30 @@ export default function useRestaurants() {
     return { restaurantOrderCarts, isLoading };
   };
 
+  // const usePostRestaurantOrders = useMutation({
+  //   mutationFn: (restaurantId: number) => {
+  //     return postRestaurantOrders(restaurantId);
+  //   },
+  //   onSuccess: () => {
+  //     return postRestaurantOrders(restaurantId);
+  //   },
+
+  // const usePostRestaurantOrders = (restaurantId: number) => {
+  //   const { data: restaurantOrders, isLoading } = useQuery<RestaurantOrderInfoRes, AxiosError>({
+  //     queryKey: ['get-postRestaurantOrders', restaurantId],
+  //     queryFn: () => postRestaurantOrders(restaurantId),
+  //     placeholderData: keepPreviousData,
+  //   });
+
+  //   return { restaurantOrders, isLoading };
+  // };
+
   return {
     useGetRestaurants,
     useGetRestaurantDetail,
     useGetRestaurantOrdersProducts,
     useAddRestaurantOrderCarts,
     useGetRestaurantOrderCarts,
+    // usePostRestaurantOrders,
   };
 }

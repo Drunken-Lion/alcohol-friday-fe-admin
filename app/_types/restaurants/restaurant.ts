@@ -98,3 +98,34 @@ export interface RestaurantOrderCartReq {
   productId: number;
   quantity: number;
 }
+
+export interface RestaurantOrderInfoRes {
+  id: number;
+  businessName: string;
+  address: string;
+  totalPrice: number;
+  status: string;
+  member: {
+    id: number;
+    name: string;
+    nickname: string;
+    email: string;
+  };
+  details: [
+    {
+      id: number;
+      name: string;
+      makerName: string;
+      price: number;
+      orderQuantity: number;
+      totalPrice: number;
+      file?: FileInfo;
+    },
+  ];
+}
+
+export interface RestaurantOrderReq {
+  description: string;
+  phone: number;
+  recipient: string;
+}

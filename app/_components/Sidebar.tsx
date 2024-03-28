@@ -78,7 +78,7 @@ export default function SideNavbar({ restaurant }: RestaurantDetailProps) {
             {menu === '가게 정보 관리' && <Detail restaurant={restaurant} />}
             {menu === '가게 재고 관리' && <Stock restaurant={restaurant} />}
             {menu === '재고 발주' && <StockOrder restaurantId={restaurant.id} />}
-            {menu === '장바구니' && <Cart restaurantId={restaurant.id} />}
+            {menu === '장바구니' && <Cart restaurantId={restaurant.id} setMenu={setMenu} />}
             {menu === '발주 내역' && <Order restaurant={restaurant} />}
             {menu === '환불 내역' && <Refund restaurant={restaurant} />}
           </div>

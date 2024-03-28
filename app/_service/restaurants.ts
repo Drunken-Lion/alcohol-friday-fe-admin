@@ -1,6 +1,6 @@
 'use client';
 
-import { RestaurantOrderCartReq } from '../_types/restaurants/restaurant';
+import { RestaurantOrderCartReq, RestaurantOrderReq } from '../_types/restaurants/restaurant';
 import instance from './axios';
 
 /**
@@ -49,6 +49,26 @@ export const addRestaurantOrderCarts = async (data: RestaurantOrderCartReq) => {
 export const getRestaurantOrderCarts = async (restaurantId: number, page = 0, size = 20) => {
   const url = '/v1/admin/restaurant-order-carts/owner';
   const res = await instance.get(url, { params: { restaurantId, page, size } });
+
+  return res.data;
+};
+
+/**
+ * /v1/admin/restaurant-orders/owner - 재고발주(발주정보 입력)
+ */
+export const postRestaurantOrders = async (restaurantId: number) => {
+  const url = '/v1/admin/restaurant-orders/owner';
+  const res = await instance.post(url, { restaurantId: restaurantId });
+
+  return res.data;
+};
+
+/**
+ * /v1/admin/restaurant-orders/{id}/owner - 재고발주(발주하기)
+ */
+export const putRestaurantOrders = async (id: number, data: RestaurantOrderReq) => {
+  const url = `/v1/admin/restaurant-orders/${id}/owner`;
+  const res = await instance.put(url, data);
 
   return res.data;
 };
