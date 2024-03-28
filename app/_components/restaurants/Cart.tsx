@@ -38,15 +38,19 @@ export default function Cart({ restaurantId, setMenu }: Props) {
 
   const handleClickPutOrder = async (id: number) => {
     if (window.confirm('발주 하시겠습니까?')) {
-      const data = {
-        description: description,
-        phone: phone,
-        recipient: recipient,
-      };
-      await putRestaurantOrders(id, data);
+      try {
+        const data = {
+          description: description,
+          phone: phone,
+          recipient: recipient,
+        };
+        await putRestaurantOrders(id, data);
 
-      alert('발주 되었습니다.');
-      setMenu('발주 내역');
+        alert('발주 되었습니다.');
+        setMenu('발주 내역');
+      } catch (error: any) {
+        alert(error.message);
+      }
     }
   };
 
