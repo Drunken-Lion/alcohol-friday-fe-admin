@@ -2,11 +2,11 @@
 
 import React from 'react';
 
-import { useGetRestaurantDetail } from '@/app/_hooks/useRestaurants';
-import Detail from '@/app/_components/restaurants/Detail';
+import useRestaurants from '@/app/_hooks/useRestaurants';
 import SideNavbar from '@/app/_components/Sidebar';
 
 export default function RestaurantDetailPage({ params: { id } }: { params: { id: number } }) {
+  const { useGetRestaurantDetail } = useRestaurants();
   const { restaurant, isLoading } = useGetRestaurantDetail(id);
 
   if (!restaurant) {

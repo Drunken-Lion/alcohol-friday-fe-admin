@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Detail from './restaurants/Detail';
-import { RestaurantDetail } from '../_types/restaurants/restaurant';
 import Stock from './restaurants/Stock';
 import StockOrder from './restaurants/StockOrder';
 import Cart from './restaurants/Cart';
@@ -78,8 +77,8 @@ export default function SideNavbar({ restaurant }: RestaurantDetailProps) {
           <div className="m-auto w-3/4 h-auto py-6 rounded-lg my-8 bg-content1 overflow-auto shadow-small">
             {menu === '가게 정보 관리' && <Detail restaurant={restaurant} />}
             {menu === '가게 재고 관리' && <Stock restaurant={restaurant} />}
-            {menu === '재고 발주' && <StockOrder restaurant={restaurant} />}
-            {menu === '장바구니' && <Cart restaurant={restaurant} />}
+            {menu === '재고 발주' && <StockOrder restaurantId={restaurant.id} />}
+            {menu === '장바구니' && <Cart restaurantId={restaurant.id} />}
             {menu === '발주 내역' && <Order restaurant={restaurant} />}
             {menu === '환불 내역' && <Refund restaurant={restaurant} />}
           </div>

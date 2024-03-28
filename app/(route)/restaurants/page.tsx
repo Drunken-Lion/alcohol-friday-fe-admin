@@ -2,7 +2,7 @@
 
 import Loading from '@/app/_components/Loading';
 import Pagination from '@/app/_components/Pagination';
-import { useGetRestaurants } from '@/app/_hooks/useRestaurants';
+import useRestaurants from '@/app/_hooks/useRestaurants';
 import { dateFormat } from '@/app/_utils/common';
 import {
   Chip,
@@ -50,6 +50,7 @@ const columns = [
 export default function RestaurantsPage() {
   const [pageNum, setPageNum] = useState(1);
   const limitPerPage = 20;
+  const { useGetRestaurants } = useRestaurants();
   const { restaurants, isLoading } = useGetRestaurants(pageNum - 1, limitPerPage);
   const router = useRouter();
 

@@ -65,3 +65,36 @@ export interface StockProductInfo {
   stockQuantity: number;
   stockProductFile: FileInfo;
 }
+
+export interface AllRestaurantOrderProductResponse {
+  data: RestaurantOrderProduct[];
+  pageInfo: PageInfo;
+}
+
+export interface RestaurantOrderProduct {
+  id: number;
+  name: string;
+  makerName: string;
+  price: number;
+  quantity: number;
+  file?: FileInfo;
+}
+
+export interface AllRestaurantOrderCartsResponse {
+  data: RestaurantOrderCarts[];
+  pageInfo: PageInfo;
+}
+
+export interface RestaurantOrderCarts extends RestaurantOrderProduct {
+  productId: number;
+  productName: string;
+  totalPrice: number;
+  ableQuantity: number;
+  files?: FileInfo;
+}
+
+export interface RestaurantOrderCartReq {
+  restaurantId: number;
+  productId: number;
+  quantity: number;
+}
